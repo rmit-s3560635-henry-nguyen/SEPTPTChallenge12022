@@ -1,12 +1,16 @@
 package com.example.septchallenge1.controller;
 
 import com.example.septchallenge1.dao.ItemDAO;
+import com.example.septchallenge1.model.Item;
 import com.example.septchallenge1.model.Items;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
 
 @RestController
 public class ItemController {
@@ -15,8 +19,32 @@ public class ItemController {
     private ItemDAO itemDAO;
 
     @GetMapping(path = "/item/item", produces = "application/json")
-    public Items getItems() { return itemDAO.getAllProducts();}
+    public Items getItems() { return itemDAO.getAllItems();}
 
-    
+//   @GetMapping(path = "/item/item/{id}", produces = "application/json")
+//    public Item getItem(@PathVariable String id) {
+//
+//        System.out.println(itemDAO.getItem(id));
+//        return itemDAO.getItem(id);
+//   }
+
+    @PostMapping(path = "/item/item", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> addItem(
+            @RequestHeader(name = "X-COM-PERSIST", required = false) String headerPersist,
+            @RequestHeader(name = "X-COM-LOCATION", required = false, defaultValue = "ASIA") String headerLocation,
+            @RequestBody Item item
+    ) throws Exception
+    {
+        Integer id = itemDAO.getAllItems().getItemList().size() + 1;
+
+        item.setId(id.toString());
+
+        itemDAO.addItem(item);
+
+        URI  location = ServletUriComponentsBuilder.fromCurrentRequest().path("/item/item/{id}").buildAndExpand(item.getId()).toUri();
+        return ResponseEntity.created(location).build();
+    }
+
+//    @PutMapping(path = "item/item")
 
 }

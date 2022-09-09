@@ -10,12 +10,15 @@ public class ItemDAO {
 
     static
     {
-        list.getItemList().add(new Item("01", "Iphone 14", "This is the new iphone", 1299.0));
-        list.getItemList().add(new Item("02", "Iphone 14 pro", "This is the new iphone", 1799.0));
-        list.getItemList().add(new Item("03", "Iphone 14 pro max", "This is the new iphone",  1999.0));
+        list.getItemList().add(new Item("1", "Iphone 14", "This is the new iphone", 1299.0));
+        list.getItemList().add(new Item("2", "Iphone 14 pro", "This is the new iphone", 1799.0));
+        list.getItemList().add(new Item("3", "Iphone 14 pro max", "This is the new iphone",  1999.0));
     }
 
-    public Items getAllProducts() { return list; }
+    public Items getAllItems() { return list; }
 
-    public void addProduct(Item product) { list.getItemList().add(product);}
+    public Item getItem(String id) {
+        return list.getItem(id);
+    }
+    public void addItem(Item item) { list.getItemList().add(item);}
 }

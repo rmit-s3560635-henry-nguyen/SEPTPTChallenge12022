@@ -13,5 +13,14 @@ public class Items {
         return itemList;
     }
 
+    public Item getItem(String id) {
+        Item item = new Item();
+        for (int i = 0; i < itemList.size(); i++) {
+            if(itemList.get(i).getId() == id) {
+                item = itemList.get(i);
+            }
+        }
+        return item;
+    }
     public void setItemList(List<Item> itemList) { this.itemList = itemList;}
 }
