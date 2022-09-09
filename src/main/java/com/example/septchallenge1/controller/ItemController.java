@@ -21,12 +21,12 @@ public class ItemController {
     @GetMapping(path = "/item/item", produces = "application/json")
     public Items getItems() { return itemDAO.getAllItems();}
 
-//   @GetMapping(path = "/item/item/{id}", produces = "application/json")
-//    public Item getItem(@PathVariable String id) {
-//
-//        System.out.println(itemDAO.getItem(id));
-//        return itemDAO.getItem(id);
-//   }
+   @GetMapping(path = "/item/item/{id}", produces = "application/json")
+    public Item getItem(@PathVariable String id) {
+
+        System.out.println(id);
+        return itemDAO.getItem(id);
+   }
 
     @PostMapping(path = "/item/item", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Object> addItem(
@@ -46,5 +46,8 @@ public class ItemController {
     }
 
 //    @PutMapping(path = "item/item")
-
+        @DeleteMapping(path = "/item/item")
+        public void deleteItems() {
+            itemDAO.deleteItems();
+        }
 }

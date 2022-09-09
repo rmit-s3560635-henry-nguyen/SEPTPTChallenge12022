@@ -15,12 +15,20 @@ public class Items {
 
     public Item getItem(String id) {
         Item item = new Item();
+        int index;
         for (int i = 0; i < itemList.size(); i++) {
             if(itemList.get(i).getId() == id) {
-                item = itemList.get(i);
+                index = i;
+                break;
+
             }
+
         }
-        return item;
+        return null;
+    }
+
+    public void deleteItems() {
+        itemList.clear();
     }
     public void setItemList(List<Item> itemList) { this.itemList = itemList;}
 }

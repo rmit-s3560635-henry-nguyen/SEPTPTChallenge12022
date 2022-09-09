@@ -21,4 +21,8 @@ public class ItemDAO {
         return list.getItem(id);
     }
     public void addItem(Item item) { list.getItemList().add(item);}
+
+    public void deleteItems() {
+        list.deleteItems();
+    }
 }
